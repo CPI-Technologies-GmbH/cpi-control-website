@@ -44,16 +44,14 @@ function Nav() {
 function ScreenMockup({ src, alt, className = "" }: { src: string; alt: string; className?: string }) {
   return (
     <div className={`relative ${className}`}>
-      <div className="rounded-xl border border-gray-700/50 bg-gray-900 shadow-2xl shadow-black/50 overflow-hidden">
-        <div className="flex items-center gap-2 px-4 py-3 bg-gray-800/80 border-b border-gray-700/30">
-          <div className="w-3 h-3 rounded-full bg-red-500/80" />
-          <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-          <div className="w-3 h-3 rounded-full bg-green-500/80" />
-          <div className="flex-1 mx-4">
-            <div className="bg-gray-700/50 rounded-md px-3 py-1 text-[10px] font-mono text-gray-500 text-center max-w-xs mx-auto">CPI-Control</div>
-          </div>
+      <div className="rounded-xl border border-gray-700/40 bg-gray-900 shadow-2xl shadow-black/60 overflow-hidden">
+        {/* macOS-style slim title bar — no URL bar */}
+        <div className="flex items-center gap-[6px] px-3 py-[6px] bg-gray-800/60 border-b border-gray-700/20">
+          <div className="w-[10px] h-[10px] rounded-full bg-[#ff5f57]" />
+          <div className="w-[10px] h-[10px] rounded-full bg-[#ffbd2e]" />
+          <div className="w-[10px] h-[10px] rounded-full bg-[#28c840]" />
         </div>
-        <Image src={src} alt={alt} width={1440} height={900} className="w-full h-auto" />
+        <Image src={src} alt={alt} width={1920} height={1080} className="w-full h-auto" quality={95} />
       </div>
     </div>
   );
