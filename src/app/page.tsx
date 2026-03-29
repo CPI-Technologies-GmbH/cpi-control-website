@@ -1,13 +1,9 @@
 import Image from "next/image";
+import HeroSlideshow from "@/components/HeroSlideshow";
+import LiveLogDemo from "@/components/LiveLogDemo";
 
 function Ticker() {
-  const items = [
-    "Free Download Available",
-    "macOS & Windows",
-    "100% Local Data — Zero Cloud",
-    "Kubernetes + Vercel + GitHub + AWS",
-    "Built with Tauri & React",
-  ];
+  const items = ["Free Download Available", "macOS & Windows", "100% Local Data — Zero Cloud", "Kubernetes + Vercel + GitHub + AWS", "Built with Tauri & React"];
   const doubled = [...items, ...items, ...items];
   return (
     <div className="fixed top-0 left-0 right-0 z-[200] h-9 bg-blue-600 overflow-hidden flex items-center">
@@ -41,39 +37,24 @@ function Nav() {
   );
 }
 
-function ScreenMockup({ src, alt, className = "" }: { src: string; alt: string; className?: string }) {
-  return (
-    <div className={`relative ${className}`}>
-      <div className="rounded-xl border border-gray-700/40 bg-gray-900 shadow-2xl shadow-black/60 overflow-hidden">
-        {/* macOS-style slim title bar — no URL bar */}
-        <div className="flex items-center gap-[6px] px-3 py-[6px] bg-gray-800/60 border-b border-gray-700/20">
-          <div className="w-[10px] h-[10px] rounded-full bg-[#ff5f57]" />
-          <div className="w-[10px] h-[10px] rounded-full bg-[#ffbd2e]" />
-          <div className="w-[10px] h-[10px] rounded-full bg-[#28c840]" />
-        </div>
-        <Image src={src} alt={alt} width={1920} height={1080} className="w-full h-auto" quality={95} />
-      </div>
-    </div>
-  );
-}
-
 function Hero() {
   return (
-    <section className="min-h-screen pt-44 pb-24 px-6 md:px-12 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-      <div style={{ animation: "fadeSlideUp 1s ease 0.2s both" }}>
-        <div className="font-mono text-xs font-medium text-blue-400 uppercase tracking-[0.12em] mb-7 flex items-center gap-3">
+    <section className="pt-36 pb-16 px-6 md:px-12 max-w-7xl mx-auto" style={{ animation: "fadeSlideUp 1s ease 0.2s both" }}>
+      <div className="text-center mb-12">
+        <div className="font-mono text-xs font-medium text-blue-400 uppercase tracking-[0.12em] mb-5 flex items-center justify-center gap-3">
           <span className="w-6 h-px bg-blue-400" />
           Desktop App for DevOps
+          <span className="w-6 h-px bg-blue-400" />
         </div>
-        <h1 className="text-5xl md:text-7xl font-bold leading-[1.0] tracking-tight mb-8 text-gray-100">
+        <h1 className="text-5xl md:text-7xl font-bold leading-[1.0] tracking-tight mb-6 text-gray-100">
           Stop tab-hopping.<br />Start <em className="text-blue-400 not-italic">shipping.</em>
         </h1>
-        <p className="text-lg leading-relaxed text-gray-400 max-w-lg mb-10">
+        <p className="text-lg leading-relaxed text-gray-400 max-w-2xl mx-auto mb-8">
           CPI-Control puts Kubernetes management, health monitoring,
           deployment tracking, and live logs into one native desktop app.
           Your data never leaves your machine.
         </p>
-        <div className="flex gap-3 flex-wrap mb-12">
+        <div className="flex gap-3 justify-center flex-wrap mb-10">
           <a href="#download" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-mono text-sm font-semibold transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-600/25">
             &#8595;&ensp;Download for macOS
           </a>
@@ -81,21 +62,24 @@ function Hero() {
             Download for Windows
           </a>
         </div>
-        <div className="flex gap-10 border-t border-gray-800 pt-7">
-          {[
-            { label: "Annual Cost", value: "€99", unit: "/yr" },
-            { label: "Data in Cloud", value: "Zero", color: "text-green-400" },
-            { label: "Setup Time", value: "2", unit: "min" },
-          ].map((s) => (
-            <div key={s.label}>
-              <div className="font-mono text-[10px] font-medium text-gray-500 uppercase tracking-widest mb-1">{s.label}</div>
-              <div className={`text-3xl font-bold ${s.color || "text-gray-100"}`}>{s.value}{s.unit && <span className="text-base text-gray-500 ml-0.5">{s.unit}</span>}</div>
-            </div>
-          ))}
-        </div>
       </div>
-      <div className="hidden lg:block" style={{ animation: "fadeSlideUp 1s ease 0.5s both" }}>
-        <ScreenMockup src="/screenshots/01-dashboard.png" alt="CPI-Control Dashboard" className="rotate-1 hover:rotate-0 transition-transform duration-500" />
+
+      {/* Fullscreen slideshow */}
+      <HeroSlideshow />
+
+      {/* Stats bar */}
+      <div className="flex gap-10 justify-center border-t border-gray-800 pt-7 mt-10">
+        {[
+          { label: "Annual Cost", value: "Free", sub: "up to 50 services", color: "text-green-400" },
+          { label: "Data in Cloud", value: "Zero", color: "text-green-400" },
+          { label: "Setup Time", value: "2", unit: "min" },
+        ].map((s) => (
+          <div key={s.label} className="text-center">
+            <div className="font-mono text-[10px] font-medium text-gray-500 uppercase tracking-widest mb-1">{s.label}</div>
+            <div className={`text-3xl font-bold ${s.color || "text-gray-100"}`}>{s.value}{s.unit && <span className="text-base text-gray-500 ml-0.5">{s.unit}</span>}</div>
+            {s.sub && <div className="text-xs text-gray-500 mt-0.5">{s.sub}</div>}
+          </div>
+        ))}
       </div>
     </section>
   );
@@ -111,26 +95,6 @@ function IntegrationsBar() {
         {doubled.map((item, i) => (
           <span key={i} className="font-mono text-sm font-medium text-gray-400 opacity-50 hover:opacity-100 transition-opacity whitespace-nowrap">{item}</span>
         ))}
-      </div>
-    </section>
-  );
-}
-
-function ScreenshotShowcase() {
-  return (
-    <section className="py-32 px-6 md:px-12 max-w-7xl mx-auto">
-      <div className="text-center mb-20">
-        <p className="font-mono text-xs text-blue-400 uppercase tracking-widest mb-4">See it in action</p>
-        <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-100">Every view, one app.</h2>
-      </div>
-      <div className="grid md:grid-cols-2 gap-8">
-        <ScreenMockup src="/screenshots/02-services.png" alt="Service List" />
-        <ScreenMockup src="/screenshots/05-deployments.png" alt="Deployments" />
-        <ScreenMockup src="/screenshots/04-project-detail.png" alt="Project Detail" />
-        <ScreenMockup src="/screenshots/06-incidents.png" alt="Incidents" />
-      </div>
-      <div className="mt-8">
-        <ScreenMockup src="/screenshots/07-integrations.png" alt="Integrations" />
       </div>
     </section>
   );
@@ -170,15 +134,15 @@ function Problems() {
 
 function Features() {
   const rows = [
-    { num: "01", label: "Discovery", title: "Zero-config service discovery", desc: "Connect your kubeconfig, Vercel, and GitHub — CPI-Control finds every service automatically." },
-    { num: "02", label: "Health", title: "Built-in health monitoring", desc: "HTTP health checks with automatic incident creation, auto-recovery, and response body capture." },
-    { num: "03", label: "Kubernetes", title: "Multi-cluster Kubernetes management", desc: "Pod metrics, deployment restarts, CronJob management, and one-click terminal access to any pod." },
-    { num: "04", label: "Deploys", title: "Cross-provider deployment tracking", desc: "Vercel, GitHub Actions, Semaphore, K8s — every deployment in one timeline with correlation engine." },
-    { num: "05", label: "Logs", title: "Multi-cluster live logs", desc: "Aggregated via stern with in-memory ring buffer, SSE live tail, deduplication, and floating log window." },
-    { num: "06", label: "AI", title: "AI-powered diagnostics", desc: "AI analyzes pod logs, events, and metrics to identify root cause and suggest fixes." },
-    { num: "07", label: "Alerts", title: "Smart push notifications", desc: "Mute-aware alerts with batching and routing to Slack, email, or webhooks." },
-    { num: "08", label: "Projects", title: "Project-based organization", desc: "Group services into projects with dedicated dashboards, timelines, and incident history." },
-    { num: "09", label: "Privacy", title: "100% local. Zero cloud dependency.", desc: "SQLite + macOS Keychain. No cloud account. No telemetry. GDPR-compliant by architecture." },
+    { num: "01", label: "Discovery", icon: "🔍", title: "Zero-config service discovery", desc: "Connect your kubeconfig, Vercel, and GitHub — CPI-Control finds every service automatically." },
+    { num: "02", label: "Health", icon: "💚", title: "Built-in health monitoring", desc: "HTTP health checks with automatic incident creation, auto-recovery, and response body capture." },
+    { num: "03", label: "Kubernetes", icon: "☸️", title: "Multi-cluster Kubernetes management", desc: "Pod metrics, deployment restarts, CronJob management, and one-click terminal access to any pod." },
+    { num: "04", label: "Deploys", icon: "🚀", title: "Cross-provider deployment tracking", desc: "Vercel, GitHub Actions, Semaphore, K8s — every deployment in one timeline with correlation engine." },
+    { num: "05", label: "Logs", icon: "📜", title: "Multi-cluster live logs", desc: "Aggregated via stern with in-memory ring buffer, SSE live tail, deduplication, and floating log window." },
+    { num: "06", label: "AI", icon: "🧠", title: "AI-powered diagnostics", desc: "AI analyzes pod logs, events, and metrics to identify root cause and suggest fixes." },
+    { num: "07", label: "Alerts", icon: "🔔", title: "Smart push notifications", desc: "Mute-aware alerts with batching and routing to Slack, email, or webhooks." },
+    { num: "08", label: "Projects", icon: "📁", title: "Project-based organization", desc: "Group services into projects with dedicated dashboards, timelines, and incident history." },
+    { num: "09", label: "Privacy", icon: "🔒", title: "100% local. Zero cloud dependency.", desc: "SQLite + macOS Keychain. No cloud account. No telemetry. GDPR-compliant by architecture." },
   ];
   return (
     <section id="features" className="py-36 px-6 md:px-12 max-w-7xl mx-auto">
@@ -189,7 +153,9 @@ function Features() {
       {rows.map((r) => (
         <div key={r.num} className="grid lg:grid-cols-[280px_1fr] border-t border-gray-800/60 hover:bg-white/[0.015] transition-colors">
           <div className="py-8 pr-8 font-mono text-sm font-semibold text-blue-400 flex items-start gap-3">
-            <span className="text-[10px] text-gray-600">{r.num}</span> {r.label}
+            <span className="text-lg">{r.icon}</span>
+            <span className="text-[10px] text-gray-600 mt-1">{r.num}</span>
+            <span className="mt-0.5">{r.label}</span>
           </div>
           <div className="py-8 pl-0 lg:pl-8 lg:border-l border-gray-800/40">
             <h3 className="text-lg font-semibold mb-2 text-gray-100">{r.title}</h3>
@@ -204,7 +170,7 @@ function Features() {
 
 function Comparison() {
   const rows = [
-    { f: "Annual Cost", cpi: "€99-149", dd: "€9K-30K+", lens: "€299", bs: "€1.5K-3K" },
+    { f: "Pricing", cpi: "Free up to 50 services", dd: "€9K-30K+/yr", lens: "€299/yr", bs: "€1.5K-3K/yr" },
     { f: "K8s Management", cpi: "Multi-cluster", dd: "Metrics only", lens: "Full IDE", bs: "—" },
     { f: "Health Monitoring", cpi: "Built-in", dd: "Synthetics", lens: "—", bs: "Core feature" },
     { f: "Deploy Tracking", cpi: "Multi-provider", dd: "Yes", lens: "—", bs: "—" },
@@ -212,10 +178,9 @@ function Comparison() {
     { f: "Terminal to Pod", cpi: "Yes", dd: "—", lens: "Yes", bs: "—" },
     { f: "AI Diagnostics", cpi: "Yes", dd: "Watchdog", lens: "Prism AI", bs: "—" },
     { f: "Data Location", cpi: "Your machine", dd: "US Cloud", lens: "Local", bs: "EU/US Cloud" },
-    { f: "Native Desktop", cpi: "Tauri (Rust)", dd: "—", lens: "Electron", bs: "—" },
   ];
   return (
-    <section id="pricing" className="py-36 px-6 md:px-12 max-w-7xl mx-auto">
+    <section className="py-36 px-6 md:px-12 max-w-7xl mx-auto">
       <div className="grid lg:grid-cols-2 gap-20 mb-20">
         <div>
           <div className="text-8xl font-bold text-gray-800/50 leading-none mb-[-10px]">03</div>
@@ -240,14 +205,125 @@ function Comparison() {
             {rows.map((r, i) => (
               <tr key={i} className="border-t border-gray-800/30 hover:bg-white/[0.02]">
                 <td className="p-4 text-sm font-medium text-gray-200">{r.f}</td>
-                <td className={`p-4 text-sm font-semibold bg-blue-500/5 ${r.f === "Annual Cost" ? "text-green-400 text-lg" : r.f === "Data Location" ? "text-green-400" : "text-gray-100"}`}>{r.cpi}</td>
-                <td className={`p-4 text-sm text-gray-400 ${r.f === "Annual Cost" ? "text-red-400/70" : ""}`}>{r.dd}</td>
+                <td className={`p-4 text-sm font-semibold bg-blue-500/5 ${r.f === "Pricing" ? "text-green-400" : r.f === "Data Location" ? "text-green-400" : "text-gray-100"}`}>{r.cpi}</td>
+                <td className={`p-4 text-sm text-gray-400 ${r.f === "Pricing" ? "text-red-400/70" : ""}`}>{r.dd}</td>
                 <td className="p-4 text-sm text-gray-400">{r.lens}</td>
                 <td className="p-4 text-sm text-gray-400">{r.bs}</td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
+    </section>
+  );
+}
+
+function Pricing() {
+  const plans = [
+    {
+      name: "Free",
+      price: "€0",
+      period: "forever",
+      desc: "Everything you need to get started.",
+      highlight: false,
+      features: [
+        "Up to 50 services",
+        "1 remote agent",
+        "Multi-cluster K8s",
+        "Health monitoring",
+        "Deployment tracking",
+        "Live logs",
+        "Push notifications",
+        "100% local data",
+      ],
+    },
+    {
+      name: "Team",
+      price: "€99",
+      period: "/year",
+      desc: "For growing teams and more infrastructure.",
+      highlight: true,
+      features: [
+        "Up to 500 services",
+        "3 remote agents",
+        "Everything in Free",
+        "AI diagnostics",
+        "Priority sync intervals",
+        "Log buffer up to 100K",
+        "Project-based organization",
+        "Email support",
+      ],
+    },
+    {
+      name: "Unlimited",
+      price: "€499",
+      period: "/year",
+      desc: "No limits. Premium support.",
+      highlight: false,
+      features: [
+        "Unlimited services",
+        "Unlimited remote agents",
+        "Everything in Team",
+        "Premium support",
+        "Custom integrations",
+        "Onboarding assistance",
+        "Priority feature requests",
+        "SLA guarantees",
+      ],
+    },
+  ];
+
+  return (
+    <section id="pricing" className="py-36 px-6 md:px-12 max-w-7xl mx-auto">
+      <div className="text-center mb-16">
+        <div className="text-8xl font-bold text-gray-800/50 leading-none mb-[-10px]">04</div>
+        <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">Simple pricing.<br />No surprises.</h2>
+        <p className="text-gray-400 text-lg">Start free. Upgrade when you need more.</p>
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-6">
+        {plans.map((plan) => (
+          <div
+            key={plan.name}
+            className={`rounded-xl border p-8 flex flex-col ${
+              plan.highlight
+                ? "border-blue-500/40 bg-blue-500/5 shadow-lg shadow-blue-500/10 relative"
+                : "border-gray-800 bg-gray-900/50"
+            }`}
+          >
+            {plan.highlight && (
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-blue-600 text-white text-[10px] font-mono font-semibold uppercase tracking-widest rounded-full">
+                Most Popular
+              </div>
+            )}
+            <div className="mb-6">
+              <h3 className="text-xl font-bold text-gray-100 mb-1">{plan.name}</h3>
+              <div className="flex items-baseline gap-1 mb-2">
+                <span className="text-4xl font-bold text-gray-100">{plan.price}</span>
+                <span className="text-sm text-gray-500">{plan.period}</span>
+              </div>
+              <p className="text-sm text-gray-400">{plan.desc}</p>
+            </div>
+            <ul className="space-y-3 mb-8 flex-1">
+              {plan.features.map((f) => (
+                <li key={f} className="flex items-start gap-2 text-sm text-gray-300">
+                  <span className="text-green-400 mt-0.5">&#10003;</span>
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <a
+              href="#download"
+              className={`text-center py-3 rounded-lg font-mono text-sm font-semibold transition-all ${
+                plan.highlight
+                  ? "bg-blue-600 hover:bg-blue-500 text-white hover:shadow-lg hover:shadow-blue-600/25"
+                  : "bg-gray-800 hover:bg-gray-700 text-gray-200 border border-gray-700"
+              }`}
+            >
+              {plan.price === "€0" ? "Download Free" : "Get Started"}
+            </a>
+          </div>
+        ))}
       </div>
     </section>
   );
@@ -262,17 +338,14 @@ function FinalCTA() {
           Download CPI-Control.<br />It&apos;s <em className="text-blue-400 not-italic">free</em> to start.
         </h2>
         <p className="text-lg text-gray-400 leading-relaxed mb-10">
-          Get started with up to 5 services and 1 cluster — no account required, no credit card, no data leaves your machine.
+          Get started with up to 50 services and 1 cluster — no account required, no credit card, no data leaves your machine.
         </p>
         <div className="flex gap-3 justify-center flex-wrap mb-7">
           <a href="#" className="inline-flex items-center gap-2 px-10 py-4 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-mono text-[15px] font-semibold transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-600/25">&#8595;&ensp;Download for macOS</a>
           <a href="#" className="inline-flex items-center gap-2 px-10 py-4 rounded-lg border border-gray-700 hover:border-gray-500 text-gray-300 font-mono text-[15px] font-semibold transition-all hover:bg-gray-800/50">Download for Windows</a>
         </div>
         <div className="flex gap-6 justify-center flex-wrap font-mono text-xs text-gray-500">
-          <span>macOS 12+ (.dmg)</span>
-          <span>Windows 10+ (.msi)</span>
-          <span>~45 MB</span>
-          <span>No account needed</span>
+          <span>macOS 12+ (.dmg)</span><span>Windows 10+ (.msi)</span><span>~45 MB</span><span>No account needed</span>
         </div>
       </div>
     </section>
@@ -303,10 +376,11 @@ export default function Home() {
       <Nav />
       <Hero />
       <IntegrationsBar />
-      <ScreenshotShowcase />
+      <LiveLogDemo />
       <Problems />
       <Features />
       <Comparison />
+      <Pricing />
       <FinalCTA />
       <Footer />
     </>
