@@ -6,14 +6,14 @@ import {
   countActiveActivations,
   createActivation,
   generateToken,
-  PLAN_LIMITS,
+  getPlanLimits,
 } from "@/lib/license-db";
 
 export async function POST(request: NextRequest) {
   try {
     await ensureTables();
 
-    const { licenseKey, machineId } = await request.json();
+    const { licenseKey, machineId, machineName } = await request.json();
 
     if (!licenseKey || !machineId) {
       return NextResponse.json({ error: "licenseKey and machineId are required" }, { status: 400 });
@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
 
     // Find license
     const license = await findLicenseByKey(licenseKey);
-    if (!license) {
+    if (!license || (license.status !== "active" && license.status !== "past_due")) {
       return NextResponse.json({ error: "Invalid or inactive license key" }, { status: 404 });
     }
 
@@ -30,37 +30,37 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "License has expired" }, { status: 403 });
     }
 
+    const plan = getPlanLimits(license.plan);
+
     // Check if already activated on this machine
     const existing = await findExistingActivation(license.id, machineId);
     if (existing) {
-      const limits = PLAN_LIMITS[license.plan] || PLAN_LIMITS.free;
       return NextResponse.json({
         token: existing.token,
         plan: license.plan,
-        limits: { maxServices: limits.maxServices, maxAgents: limits.maxAgents },
+        limits: { maxServices: plan.maxServices, maxAgents: plan.maxAgents },
         expiresAt: license.expires_at,
         alreadyActivated: true,
       });
     }
 
     // Check activation limit
-    const limits = PLAN_LIMITS[license.plan] || PLAN_LIMITS.free;
     const activeCount = await countActiveActivations(license.id);
-    if (activeCount >= limits.maxActivations) {
+    if (activeCount >= plan.maxActivations) {
       return NextResponse.json(
-        { error: `Maximum ${limits.maxActivations} activations reached. Deactivate another device first.` },
+        { error: `Maximum ${plan.maxActivations} activations reached. Deactivate another device first.` },
         { status: 409 }
       );
     }
 
     // Create activation
     const token = generateToken();
-    await createActivation(license.id, machineId, token);
+    await createActivation(license.id, machineId, token, machineName);
 
     return NextResponse.json({
       token,
       plan: license.plan,
-      limits: { maxServices: limits.maxServices, maxAgents: limits.maxAgents },
+      limits: { maxServices: plan.maxServices, maxAgents: plan.maxAgents },
       expiresAt: license.expires_at,
     });
   } catch (err: unknown) {

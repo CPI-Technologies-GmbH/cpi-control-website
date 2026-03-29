@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ensureTables, findActivationByToken, updateLastValidated, PLAN_LIMITS } from "@/lib/license-db";
+import { ensureTables, findActivationByToken, updateLastValidated, getPlanLimits } from "@/lib/license-db";
 
 export async function POST(request: NextRequest) {
   try {
@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check license status
-    if (activation.license_status !== "active") {
+    if (activation.license_status !== "active" && activation.license_status !== "past_due") {
       return NextResponse.json({ valid: false, error: "License is no longer active" }, { status: 403 });
     }
 
@@ -25,15 +25,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ valid: false, error: "License has expired" }, { status: 403 });
     }
 
-    // Update last validated
     await updateLastValidated(token);
 
-    const limits = PLAN_LIMITS[activation.plan] || PLAN_LIMITS.free;
+    const plan = getPlanLimits(activation.plan);
 
     return NextResponse.json({
       valid: true,
       plan: activation.plan,
-      limits: { maxServices: limits.maxServices, maxAgents: limits.maxAgents },
+      limits: { maxServices: plan.maxServices, maxAgents: plan.maxAgents },
       expiresAt: activation.expires_at,
     });
   } catch (err: unknown) {
