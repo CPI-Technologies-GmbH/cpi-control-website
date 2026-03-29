@@ -47,19 +47,20 @@ export default function HeroSlideshow() {
           <div className="w-[10px] h-[10px] rounded-full bg-[#28c840]" />
         </div>
 
-        <div className="relative aspect-[16/9.5] overflow-hidden">
+        <div className="relative overflow-hidden">
           {slides.map((s, i) => (
             <div
               key={s.key}
-              className={`absolute inset-0 transition-opacity duration-700 ${
-                i === active ? "opacity-100" : "opacity-0"
+              className={`transition-opacity duration-700 ${
+                i === active ? "opacity-100 relative" : "opacity-0 absolute inset-0"
               }`}
             >
               <Image
                 src={s.src}
                 alt={s.label}
-                fill
-                className="object-cover object-top"
+                width={1920}
+                height={1080}
+                className="w-full h-auto"
                 quality={95}
                 priority={i === 0}
               />
