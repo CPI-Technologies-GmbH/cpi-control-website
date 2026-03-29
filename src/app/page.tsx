@@ -364,7 +364,11 @@ function Footer() {
           <a key={l} href="#" className="hover:text-gray-300 transition-colors">{l}</a>
         ))}
       </div>
-      <div>&copy; 2026 CPI Technologies GmbH</div>
+      <a href="https://cpitech.io" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+        <span className="text-gray-600">Powered by</span>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="https://www.cpitech.io/images/68f8d51c2f57198f96420746_logo.svg" alt="CPI Technologies GmbH" className="h-4 opacity-50" />
+      </a>
     </footer>
   );
 }
