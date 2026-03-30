@@ -1,21 +1,16 @@
 import Stripe from "stripe";
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  console.warn("STRIPE_SECRET_KEY not set — Stripe functionality disabled");
-}
+let _stripe: Stripe | null = null;
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
-  apiVersion: "2025-12-18.acacia",
-});
+export function getStripe(): Stripe {
+  if (!_stripe) {
+    _stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_placeholder");
+  }
+  return _stripe;
+}
 
 export const WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || "";
 
-/**
- * Map Stripe Price IDs to plan names.
- * Set these via environment variables:
- *   STRIPE_PRICE_TEAM=price_xxx
- *   STRIPE_PRICE_UNLIMITED=price_yyy
- */
 export function planFromPriceId(priceId: string): string {
   if (priceId === process.env.STRIPE_PRICE_TEAM) return "team";
   if (priceId === process.env.STRIPE_PRICE_UNLIMITED) return "unlimited";

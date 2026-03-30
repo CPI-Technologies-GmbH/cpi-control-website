@@ -7,7 +7,7 @@ import {
   deactivateByToken,
   getPlanLimits,
 } from "@/lib/license-db";
-import { stripe } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 
 /**
  * GET /api/license/manage?key=CPI-XXXX-XXXX-XXXX-XXXX
@@ -51,10 +51,10 @@ export async function GET(request: NextRequest) {
 
         if (license.stripe_subscription_id) {
           try {
-            const sub = await stripe.subscriptions.retrieve(license.stripe_subscription_id);
+            const sub = await getStripe().subscriptions.retrieve(license.stripe_subscription_id) as any;
             subscriptionStatus = sub.status;
-            currentPeriodEnd = new Date(sub.current_period_end * 1000).toISOString();
-            cancelAtPeriodEnd = sub.cancel_at_period_end;
+            currentPeriodEnd = sub.current_period_end ? new Date(sub.current_period_end * 1000).toISOString() : null;
+            cancelAtPeriodEnd = sub.cancel_at_period_end ?? false;
           } catch {
             // Subscription may have been deleted
           }

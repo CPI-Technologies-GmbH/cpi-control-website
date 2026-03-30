@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { stripe, WEBHOOK_SECRET, planFromPriceId } from "@/lib/stripe";
+import { getStripe, WEBHOOK_SECRET, planFromPriceId } from "@/lib/stripe";
 import {
   ensureTables,
   createLicense,
@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
 
     let event: Stripe.Event;
     try {
-      event = stripe.webhooks.constructEvent(body, signature, WEBHOOK_SECRET);
+      event = getStripe().webhooks.constructEvent(body, signature, WEBHOOK_SECRET);
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Unknown error";
       console.error("Webhook signature verification failed:", message);
@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
 
         if (subscription.status === "active" || subscription.status === "trialing") {
           updates.status = "active";
-          updates.expiresAt = new Date(subscription.current_period_end * 1000).toISOString();
+          updates.expiresAt = new Date((subscription as any).current_period_end * 1000).toISOString();
           updates.cancelledAt = null;
         } else if (subscription.status === "past_due") {
           updates.status = "past_due";
@@ -80,7 +80,7 @@ export async function POST(request: NextRequest) {
         }
 
         // Handle cancel_at_period_end (user chose to cancel but still has access)
-        if (subscription.cancel_at_period_end) {
+        if ((subscription as any).cancel_at_period_end) {
           updates.cancelledAt = new Date().toISOString();
           // Don't expire yet — still active until period end
         }
@@ -106,7 +106,7 @@ export async function POST(request: NextRequest) {
 
       // ── Invoice paid (renewal) ──
       case "invoice.paid": {
-        const invoice = event.data.object as Stripe.Invoice;
+        const invoice = event.data.object as any;
         if (!invoice.subscription) break;
 
         const subId = typeof invoice.subscription === "string" ? invoice.subscription : invoice.subscription?.id;
@@ -129,7 +129,7 @@ export async function POST(request: NextRequest) {
 
       // ── Payment failed ──
       case "invoice.payment_failed": {
-        const invoice = event.data.object as Stripe.Invoice;
+        const invoice = event.data.object as any;
         if (!invoice.subscription) break;
 
         const subId = typeof invoice.subscription === "string" ? invoice.subscription : invoice.subscription?.id;

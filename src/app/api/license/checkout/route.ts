@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { stripe, priceIdFromPlan } from "@/lib/stripe";
+import { getStripe, priceIdFromPlan } from "@/lib/stripe";
 import { ensureTables, findLicenseByEmail } from "@/lib/license-db";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://cpi-control-website.vercel.app";
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create Stripe Checkout Session
-    const session = await stripe.checkout.sessions.create({
+    const session = await getStripe().checkout.sessions.create({
       mode: "subscription",
       line_items: [{ price: priceId, quantity: 1 }],
       ...customerOptions,

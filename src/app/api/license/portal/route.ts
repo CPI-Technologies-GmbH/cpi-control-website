@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 import { ensureTables, findLicenseByKey, findLicenseByEmail } from "@/lib/license-db";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://cpi-control-website.vercel.app";
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "No Stripe customer associated with this license" }, { status: 400 });
     }
 
-    const session = await stripe.billingPortal.sessions.create({
+    const session = await getStripe().billingPortal.sessions.create({
       customer: license.stripe_customer_id,
       return_url: `${BASE_URL}/#pricing`,
     });
