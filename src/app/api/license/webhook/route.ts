@@ -1,3 +1,4 @@
+export const runtime = "nodejs";
 import { NextRequest, NextResponse } from "next/server";
 import { getStripe, WEBHOOK_SECRET, planFromPriceId } from "@/lib/stripe";
 import {

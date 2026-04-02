@@ -1,3 +1,4 @@
+export const runtime = "nodejs";
 import { NextRequest, NextResponse } from "next/server";
 import { getStripe } from "@/lib/stripe";
 import { ensureTables, findLicenseByKey, findLicenseByEmail } from "@/lib/license-db";

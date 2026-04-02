@@ -1,3 +1,4 @@
+export const runtime = "nodejs";
 import { NextRequest, NextResponse } from "next/server";
 import { ensureTables, findActivationByToken, updateLastValidated, getPlanLimits } from "@/lib/license-db";
 

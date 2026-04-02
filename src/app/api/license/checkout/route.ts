@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { getStripe, priceIdFromPlan } from "@/lib/stripe";
 import { ensureTables, findLicenseByEmail } from "@/lib/license-db";
 
+export const runtime = "nodejs";
+
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://cpi-control-website.vercel.app";
 
 export async function POST(request: NextRequest) {
