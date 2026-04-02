@@ -9,12 +9,19 @@ export default async function AccountPage() {
   const session = await auth();
   if (!session?.user?.email) redirect("/login");
 
-  await ensureTables();
-  const licenses = await findLicensesByEmail(session.user.email);
-  const activeLicense = licenses.find(l => l.status === "active" || l.status === "past_due") || null;
+  let activeLicense: any = null;
+  let activations: any[] = [];
+  let activeActivations: any[] = [];
+  try {
+    await ensureTables();
+    const licenses = await findLicensesByEmail(session.user.email);
+    activeLicense = licenses.find((l: any) => l.status === "active" || l.status === "past_due") || null;
+    activations = activeLicense ? await listActivationsForLicense(activeLicense.id) : [];
+    activeActivations = activations.filter((a: any) => !a.deactivated_at);
+  } catch {
+    // Database not available — show free plan
+  }
   const plan = activeLicense ? getPlanLimits(activeLicense.plan) : getPlanLimits("free");
-  const activations = activeLicense ? await listActivationsForLicense(activeLicense.id) : [];
-  const activeActivations = activations.filter(a => !a.deactivated_at);
 
   return (
     <div className="min-h-screen bg-[#0b1120] text-gray-100">
