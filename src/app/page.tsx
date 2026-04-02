@@ -314,7 +314,7 @@ function Pricing() {
               ))}
             </ul>
             <a
-              href={plan.price === "€0" ? "https://github.com/CPI-Technologies-GmbH/cpi-control/releases/tag/latest" : "#download"}
+              href={plan.price === "€0" ? "https://github.com/CPI-Technologies-GmbH/cpi-control/releases/tag/latest" : "/login"}
               target={plan.price === "€0" ? "_blank" : undefined}
               rel={plan.price === "€0" ? "noopener noreferrer" : undefined}
               className={`text-center py-3 rounded-lg font-mono text-sm font-semibold transition-all ${
@@ -323,7 +323,7 @@ function Pricing() {
                   : "bg-gray-800 hover:bg-gray-700 text-gray-200 border border-gray-700"
               }`}
             >
-              {plan.price === "€0" ? "Download Free" : "Get Started"}
+              {plan.price === "€0" ? "Download Free" : "Register Now"}
             </a>
           </div>
         ))}
