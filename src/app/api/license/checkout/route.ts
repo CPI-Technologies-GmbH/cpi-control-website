@@ -20,7 +20,15 @@ export async function POST(request: NextRequest) {
 
     const priceId = priceIdFromPlan(plan);
     if (!priceId) {
-      return NextResponse.json({ error: `No Stripe price configured for plan: ${plan}` }, { status: 400 });
+      return NextResponse.json({
+        error: `No Stripe price configured for plan: ${plan}`,
+        debug: {
+          hasStripeKey: !!process.env.STRIPE_SECRET_KEY,
+          keyPrefix: process.env.STRIPE_SECRET_KEY?.slice(0, 10),
+          teamPrice: process.env.STRIPE_PRICE_TEAM || "NOT SET",
+          unlimitedPrice: process.env.STRIPE_PRICE_UNLIMITED || "NOT SET",
+        }
+      }, { status: 400 });
     }
 
     // Check if user already has an active license — reuse Stripe customer
@@ -58,6 +66,12 @@ export async function POST(request: NextRequest) {
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Unknown error";
     console.error("Checkout error:", message);
-    return NextResponse.json({ error: message }, { status: 500 });
+    return NextResponse.json({
+      error: message,
+      debug: {
+        hasStripeKey: !!process.env.STRIPE_SECRET_KEY,
+        keyPrefix: process.env.STRIPE_SECRET_KEY?.slice(0, 10),
+      }
+    }, { status: 500 });
   }
 }
