@@ -4,7 +4,12 @@ import { ensureTables, findLicenseByEmail } from "@/lib/license-db";
 
 export const runtime = "nodejs";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://cpi-control-website.vercel.app";
+function getBaseUrl(request: NextRequest): string {
+  // Use the request origin for dynamic base URL
+  const proto = request.headers.get("x-forwarded-proto") || "https";
+  const host = request.headers.get("host") || "cpi-control-website.vercel.app";
+  return `${proto}://${host}`;
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -50,8 +55,8 @@ export async function POST(request: NextRequest) {
       allow_promotion_codes: true,
       billing_address_collection: "auto",
       tax_id_collection: { enabled: true },
-      success_url: `${BASE_URL}/license/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${BASE_URL}/#pricing`,
+      success_url: `${getBaseUrl(request)}/license/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${getBaseUrl(request)}/#pricing`,
       metadata: {
         plan,
         email,
