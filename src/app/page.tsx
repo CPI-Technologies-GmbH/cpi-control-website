@@ -29,6 +29,7 @@ function Nav() {
         <a href="#problems" className="text-gray-500 hover:text-gray-200 text-sm font-medium transition-colors hidden md:block">Why</a>
         <a href="#features" className="text-gray-500 hover:text-gray-200 text-sm font-medium transition-colors hidden md:block">Features</a>
         <a href="#pricing" className="text-gray-500 hover:text-gray-200 text-sm font-medium transition-colors hidden md:block">Pricing</a>
+        <a href="/account" className="text-gray-500 hover:text-gray-200 text-sm font-medium transition-colors hidden md:block">Account</a>
         <a href="https://github.com/CPI-Technologies-GmbH/cpi-control/releases/tag/latest" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-mono text-sm font-semibold transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-600/25">
           Download Free &#8595;
         </a>
