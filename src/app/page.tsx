@@ -30,7 +30,7 @@ function Nav() {
         <a href="#features" className="text-gray-500 hover:text-gray-200 text-sm font-medium transition-colors hidden md:block">Features</a>
         <a href="#pricing" className="text-gray-500 hover:text-gray-200 text-sm font-medium transition-colors hidden md:block">Pricing</a>
         <a href="/account" className="text-gray-500 hover:text-gray-200 text-sm font-medium transition-colors hidden md:block">Account</a>
-        <a href="https://github.com/CPI-Technologies-GmbH/cpi-control/releases/tag/latest" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-mono text-sm font-semibold transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-600/25">
+        <a href="/api/download?platform=mac" className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-mono text-sm font-semibold transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-600/25">
           Download Free &#8595;
         </a>
       </div>
@@ -56,10 +56,10 @@ function Hero() {
           Your data never leaves your machine.
         </p>
         <div className="flex gap-3 justify-center flex-wrap mb-10">
-          <a href="https://github.com/CPI-Technologies-GmbH/cpi-control/releases/tag/latest" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-mono text-sm font-semibold transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-600/25">
+          <a href="/api/download?platform=mac" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-mono text-sm font-semibold transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-600/25">
             &#8595;&ensp;Download for macOS
           </a>
-          <a href="https://github.com/CPI-Technologies-GmbH/cpi-control/releases/tag/latest" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg border border-gray-700 hover:border-gray-500 text-gray-300 font-mono text-sm font-semibold transition-all hover:bg-gray-800/50">
+          <a href="/api/download?platform=windows" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg border border-gray-700 hover:border-gray-500 text-gray-300 font-mono text-sm font-semibold transition-all hover:bg-gray-800/50">
             Download for Windows
           </a>
         </div>
@@ -314,9 +314,7 @@ function Pricing() {
               ))}
             </ul>
             <a
-              href={plan.price === "€0" ? "https://github.com/CPI-Technologies-GmbH/cpi-control/releases/tag/latest" : "/login"}
-              target={plan.price === "€0" ? "_blank" : undefined}
-              rel={plan.price === "€0" ? "noopener noreferrer" : undefined}
+              href={plan.price === "€0" ? "/api/download?platform=mac" : "/login"}
               className={`text-center py-3 rounded-lg font-mono text-sm font-semibold transition-all ${
                 plan.highlight
                   ? "bg-blue-600 hover:bg-blue-500 text-white hover:shadow-lg hover:shadow-blue-600/25"
@@ -344,8 +342,8 @@ function FinalCTA() {
           Get started with up to 50 services and 1 cluster — no account required, no credit card, no data leaves your machine.
         </p>
         <div className="flex gap-3 justify-center flex-wrap mb-7">
-          <a href="https://github.com/CPI-Technologies-GmbH/cpi-control/releases/tag/latest" className="inline-flex items-center gap-2 px-10 py-4 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-mono text-[15px] font-semibold transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-600/25">&#8595;&ensp;Download for macOS</a>
-          <a href="https://github.com/CPI-Technologies-GmbH/cpi-control/releases/tag/latest" className="inline-flex items-center gap-2 px-10 py-4 rounded-lg border border-gray-700 hover:border-gray-500 text-gray-300 font-mono text-[15px] font-semibold transition-all hover:bg-gray-800/50">Download for Windows</a>
+          <a href="/api/download?platform=mac" className="inline-flex items-center gap-2 px-10 py-4 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-mono text-[15px] font-semibold transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-600/25">&#8595;&ensp;Download for macOS</a>
+          <a href="/api/download?platform=windows" className="inline-flex items-center gap-2 px-10 py-4 rounded-lg border border-gray-700 hover:border-gray-500 text-gray-300 font-mono text-[15px] font-semibold transition-all hover:bg-gray-800/50">Download for Windows</a>
         </div>
         <div className="flex gap-6 justify-center flex-wrap font-mono text-xs text-gray-500">
           <span>macOS 12+ (.dmg)</span><span>Windows 10+ (.msi)</span><span>~45 MB</span><span>No account needed</span>
