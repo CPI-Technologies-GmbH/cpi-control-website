@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import { signIn } from "@/lib/auth";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "Sign In",
+  description: "Sign in to your CPI-Control account to manage your license, billing, and subscription.",
+  robots: { index: false, follow: false },
+};
 
 export default function LoginPage() {
   return (

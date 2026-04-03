@@ -1,6 +1,7 @@
 import Image from "next/image";
 import HeroSlideshow from "@/components/HeroSlideshow";
 import LiveLogDemo from "@/components/LiveLogDemo";
+import MobileNav from "@/components/MobileNav";
 
 function Ticker() {
   const items = ["Free Download Available", "macOS & Windows", "100% Local Data — Zero Cloud", "Kubernetes + Vercel + GitHub + AWS", "Built with Tauri & React"];
@@ -33,6 +34,7 @@ function Nav() {
         <a href="/api/download?platform=mac" className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-mono text-sm font-semibold transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-600/25">
           Download Free &#8595;
         </a>
+        <MobileNav />
       </div>
     </nav>
   );
@@ -131,11 +133,12 @@ function StatusPageShowcase() {
         <div className="relative">
           <div className="absolute -inset-4 bg-blue-500/5 rounded-2xl blur-xl" />
           <div className="relative rounded-xl overflow-hidden border border-gray-800 shadow-2xl shadow-black/50">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/screenshots/statuspage-demo.png"
               alt="CPI-Control Status Page — real-time uptime monitoring with branded status pages"
-              className="w-full"
+              width={1200}
+              height={900}
+              className="w-full h-auto"
             />
           </div>
         </div>
@@ -377,6 +380,71 @@ function Pricing() {
   );
 }
 
+const faqs = [
+  {
+    q: "Is CPI-Control really free?",
+    a: "Yes. The Free plan includes up to 50 services, 1 remote agent, and 2 status pages — no credit card required, no time limit. Paid plans are available for teams that need more capacity.",
+  },
+  {
+    q: "Where is my data stored?",
+    a: "All data stays on your local machine in a SQLite database. Credentials are stored in your operating system's secure keychain. No data is ever sent to our servers or any cloud service.",
+  },
+  {
+    q: "Which Kubernetes versions are supported?",
+    a: "CPI-Control works with any Kubernetes cluster that provides a standard kubeconfig file, including EKS, GKE, AKS, k3s, and self-hosted clusters. Multiple clusters are supported simultaneously.",
+  },
+  {
+    q: "Do I need an account to use CPI-Control?",
+    a: "No. You can download and use CPI-Control without creating an account. An account is only needed if you want to purchase a paid plan for higher limits.",
+  },
+  {
+    q: "How do status pages work?",
+    a: "Status pages are hosted by a lightweight monitoring agent that you install on your own server. The agent performs health checks and serves branded status pages on your custom domain with automatic HTTPS via Let's Encrypt.",
+  },
+  {
+    q: "Can I use CPI-Control with Vercel, GitHub Actions, and other providers?",
+    a: "Yes. CPI-Control auto-discovers services from Kubernetes, Vercel, GitHub, DigitalOcean, Semaphore, and more. Deployments from all providers appear in a unified timeline.",
+  },
+];
+
+function FAQ() {
+  return (
+    <section id="faq" className="py-36 px-6 md:px-12 max-w-4xl mx-auto">
+      <div className="text-center mb-16">
+        <div className="text-8xl font-bold text-gray-800/50 leading-none mb-[-10px]">05</div>
+        <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">
+          Frequently asked<br />questions.
+        </h2>
+      </div>
+      <div className="divide-y divide-gray-800">
+        {faqs.map((faq) => (
+          <div key={faq.q} className="py-6">
+            <h3 className="text-base font-semibold text-gray-100 mb-2">{faq.q}</h3>
+            <p className="text-sm leading-relaxed text-gray-400">{faq.a}</p>
+          </div>
+        ))}
+      </div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqs.map((faq) => ({
+              "@type": "Question",
+              name: faq.q,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: faq.a,
+              },
+            })),
+          }),
+        }}
+      />
+    </section>
+  );
+}
+
 function FinalCTA() {
   return (
     <section id="download" className="py-44 px-6 text-center relative">
@@ -408,9 +476,10 @@ function Footer() {
         CPI-Control
       </div>
       <div className="flex gap-6">
-        {["Docs", "GitHub", "Changelog", "Privacy"].map((l) => (
-          <a key={l} href="#" className="hover:text-gray-300 transition-colors">{l}</a>
-        ))}
+        <a href="https://github.com/CPI-Technologies-GmbH/cpi-control" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300 transition-colors">GitHub</a>
+        <a href="/changelog" className="hover:text-gray-300 transition-colors">Changelog</a>
+        <a href="/privacy" className="hover:text-gray-300 transition-colors">Privacy</a>
+        <a href="/terms" className="hover:text-gray-300 transition-colors">Terms</a>
       </div>
       <a href="https://cpitech.io" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
         <span className="text-gray-600">Powered by</span>
@@ -434,6 +503,7 @@ export default function Home() {
       <Features />
       <Comparison />
       <Pricing />
+      <FAQ />
       <FinalCTA />
       <Footer />
     </>

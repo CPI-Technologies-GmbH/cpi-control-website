@@ -3,12 +3,12 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 const slides = [
-  { key: "dashboard", label: "Dashboard", src: "/screenshots/01-dashboard.png" },
-  { key: "services", label: "Services", src: "/screenshots/02-services.png" },
-  { key: "deployments", label: "Deployments", src: "/screenshots/05-deployments.png" },
-  { key: "projects", label: "Projects", src: "/screenshots/04-project-detail.png" },
-  { key: "incidents", label: "Incidents", src: "/screenshots/06-incidents.png" },
-  { key: "settings", label: "Settings", src: "/screenshots/07-integrations.png" },
+  { key: "dashboard", label: "Dashboard", src: "/screenshots/01-dashboard.png", alt: "CPI-Control Dashboard — unified view of service health, uptime, and recent deployments" },
+  { key: "services", label: "Services", src: "/screenshots/02-services.png", alt: "CPI-Control Services — health monitoring for Kubernetes, Vercel, and GitHub services" },
+  { key: "deployments", label: "Deployments", src: "/screenshots/05-deployments.png", alt: "CPI-Control Deployments — cross-provider deployment tracking with CI status" },
+  { key: "projects", label: "Projects", src: "/screenshots/04-project-detail.png", alt: "CPI-Control Projects — project-based infrastructure organization with timelines" },
+  { key: "incidents", label: "Incidents", src: "/screenshots/06-incidents.png", alt: "CPI-Control Incidents — automatic incident detection and resolution tracking" },
+  { key: "settings", label: "Settings", src: "/screenshots/07-integrations.png", alt: "CPI-Control Integrations — connect Kubernetes, GitHub, Vercel, and more" },
 ];
 
 export default function HeroSlideshow() {
@@ -57,7 +57,7 @@ export default function HeroSlideshow() {
             >
               <Image
                 src={s.src}
-                alt={s.label}
+                alt={s.alt}
                 width={1920}
                 height={1080}
                 className="w-full h-auto"

@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import { sql } from "@vercel/postgres";
 import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "License Activated",
+  description: "Your CPI-Control license has been activated successfully.",
+  robots: { index: false, follow: false },
+};
 
 async function getLicenseForSession(sessionId: string) {
   try {

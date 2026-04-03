@@ -1,9 +1,16 @@
+import type { Metadata } from "next";
 import { auth, signOut } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { findLicensesByEmail, getPlanLimits, listActivationsForLicense, ensureTables } from "@/lib/license-db";
 import AccountActions from "./AccountActions";
+
+export const metadata: Metadata = {
+  title: "Account",
+  description: "Manage your CPI-Control license, subscription, and active devices.",
+  robots: { index: false, follow: false },
+};
 
 export default async function AccountPage() {
   const session = await auth();
