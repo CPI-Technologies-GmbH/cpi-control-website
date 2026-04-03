@@ -101,6 +101,49 @@ function IntegrationsBar() {
   );
 }
 
+function StatusPageShowcase() {
+  return (
+    <section className="py-36 px-6 md:px-12 max-w-7xl mx-auto">
+      <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <div className="font-mono text-[10px] font-semibold text-blue-400 uppercase tracking-widest mb-4">Status Pages</div>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6 text-gray-100">
+            Keep your customers<br />in the loop.
+          </h2>
+          <p className="text-lg leading-relaxed text-gray-400 mb-8">
+            Create beautiful, branded status pages for your customers. Powered by your remote monitoring agent with real uptime data, response times, and incident history — no extra tools needed.
+          </p>
+          <ul className="space-y-4 text-sm text-gray-300">
+            {[
+              "Real-time uptime bars with historical data",
+              "Custom branding, logo, and color schemes",
+              "Dark, light, and minimal themes",
+              "Automatic incident detection and resolution",
+              "Hosted on your own domain via monitoring agent",
+            ].map((item) => (
+              <li key={item} className="flex items-start gap-2.5">
+                <span className="text-green-400 mt-0.5 text-base">&#10003;</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="relative">
+          <div className="absolute -inset-4 bg-blue-500/5 rounded-2xl blur-xl" />
+          <div className="relative rounded-xl overflow-hidden border border-gray-800 shadow-2xl shadow-black/50">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/screenshots/statuspage-demo.png"
+              alt="CPI-Control Status Page — real-time uptime monitoring with branded status pages"
+              className="w-full"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Problems() {
   const cards = [
     { tag: "Cost", title: "Your monitoring costs more than your servers.", desc: "Datadog's host-based pricing and log ingestion fees create bills that scale with your infrastructure — not your budget." },
@@ -177,6 +220,7 @@ function Comparison() {
     { f: "Deploy Tracking", cpi: "Multi-provider", dd: "Yes", lens: "—", bs: "—" },
     { f: "Live Logs", cpi: "Multi-cluster", dd: "Indexed", lens: "Per-pod", bs: "Aggregated" },
     { f: "Terminal to Pod", cpi: "Yes", dd: "—", lens: "Yes", bs: "—" },
+    { f: "Status Pages", cpi: "Built-in", dd: "—", lens: "—", bs: "Core feature" },
     { f: "AI Diagnostics", cpi: "Yes", dd: "Watchdog", lens: "Prism AI", bs: "—" },
     { f: "Data Location", cpi: "Your machine", dd: "US Cloud", lens: "Local", bs: "EU/US Cloud" },
   ];
@@ -230,6 +274,7 @@ function Pricing() {
       features: [
         "Up to 50 services",
         "1 remote agent",
+        "2 status pages",
         "Multi-cluster K8s",
         "Health monitoring",
         "Deployment tracking",
@@ -247,6 +292,7 @@ function Pricing() {
       features: [
         "Up to 500 services",
         "3 remote agents",
+        "10 status pages",
         "Everything in Free",
         "AI diagnostics",
         "Priority sync intervals",
@@ -264,6 +310,7 @@ function Pricing() {
       features: [
         "Unlimited services",
         "Unlimited remote agents",
+        "Unlimited status pages",
         "Everything in Team",
         "Premium support",
         "Custom integrations",
@@ -382,6 +429,7 @@ export default function Home() {
       <Hero />
       <IntegrationsBar />
       <LiveLogDemo />
+      <StatusPageShowcase />
       <Problems />
       <Features />
       <Comparison />
