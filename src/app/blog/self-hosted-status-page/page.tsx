@@ -28,6 +28,13 @@ export default function PostPage() {
             <time>April 2026</time>
           </div>
         </div>
+        <Image
+          src="/blog/status-page-hero.png"
+          alt="Creating a self-hosted branded status page"
+          width={1200}
+          height={675}
+          className="w-full h-auto rounded-xl border border-gray-800 shadow-2xl shadow-black/50 mb-8"
+        />
         <div className="prose prose-invert prose-sm max-w-none">
           <p>
             Status pages are the public face of your reliability. When customers see something broken, the first thing they check is your status page. But most status page providers charge monthly fees, host your data on their servers, and give you limited control over branding and presentation. CPI-Control lets you create a fully self-hosted status page that runs on your own infrastructure, uses your own domain, and is powered by real monitoring data rather than manually toggled statuses.

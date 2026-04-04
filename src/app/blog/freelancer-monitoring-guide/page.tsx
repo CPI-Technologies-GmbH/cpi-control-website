@@ -28,6 +28,13 @@ export default function PostPage() {
             <time>April 2026</time>
           </div>
         </div>
+        <Image
+          src="/blog/agency-hero.png"
+          alt="Professional monitoring setup for freelancers"
+          width={1200}
+          height={675}
+          className="w-full h-auto rounded-xl border border-gray-800 shadow-2xl shadow-black/50 mb-8"
+        />
         <div className="prose prose-invert prose-sm max-w-none">
           <p>
             Here&rsquo;s a scenario every freelancer knows: you build a website or web application for a client, deploy it, send

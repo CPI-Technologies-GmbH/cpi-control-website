@@ -28,6 +28,13 @@ export default function PostPage() {
             <time>April 2026</time>
           </div>
         </div>
+        <Image
+          src="/blog/kubernetes-hero.png"
+          alt="Managing multiple Kubernetes clusters from one dashboard"
+          width={1200}
+          height={675}
+          className="w-full h-auto rounded-xl border border-gray-800 shadow-2xl shadow-black/50 mb-8"
+        />
         <div className="prose prose-invert prose-sm max-w-none">
           <p>
             If you run more than one Kubernetes cluster, you know the pain. Production in one region, staging in another, maybe a dev cluster on a local machine. Each cluster has its own context, its own dashboard, its own set of bookmarked URLs. You spend half your debugging time running <code>kubectl config use-context</code> and the other half wondering if you&apos;re looking at the right cluster. CPI-Control eliminates this problem entirely by letting you upload multiple kubeconfigs and viewing all clusters in a single, unified dashboard.

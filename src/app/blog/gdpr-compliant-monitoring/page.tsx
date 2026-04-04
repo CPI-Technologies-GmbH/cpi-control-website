@@ -28,6 +28,13 @@ export default function PostPage() {
             <time>April 2026</time>
           </div>
         </div>
+        <Image
+          src="/blog/gdpr-privacy-hero.png"
+          alt="GDPR-compliant monitoring with local data storage"
+          width={1200}
+          height={675}
+          className="w-full h-auto rounded-xl border border-gray-800 shadow-2xl shadow-black/50 mb-8"
+        />
         <div className="prose prose-invert prose-sm max-w-none">
           <p>
             Your monitoring tool sees everything. Every request, every error, every log line. And buried in that data &mdash;

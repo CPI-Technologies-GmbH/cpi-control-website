@@ -28,6 +28,13 @@ export default function PostPage() {
             <time>April 2026</time>
           </div>
         </div>
+        <Image
+          src="/blog/health-monitoring-hero.png"
+          alt="Smart push notifications without alert fatigue"
+          width={1200}
+          height={675}
+          className="w-full h-auto rounded-xl border border-gray-800 shadow-2xl shadow-black/50 mb-8"
+        />
         <div className="prose prose-invert prose-sm max-w-none">
           <p>
             Alert fatigue is the silent killer of incident response. The pattern is always the same: a team sets up monitoring,

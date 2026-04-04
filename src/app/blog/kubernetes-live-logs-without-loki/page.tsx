@@ -28,6 +28,13 @@ export default function PostPage() {
             <time>April 2026</time>
           </div>
         </div>
+        <Image
+          src="/blog/live-logs-hero.png"
+          alt="Aggregating Kubernetes live logs without Loki"
+          width={1200}
+          height={675}
+          className="w-full h-auto rounded-xl border border-gray-800 shadow-2xl shadow-black/50 mb-8"
+        />
         <div className="prose prose-invert prose-sm max-w-none">
           <p>
             Kubernetes logging is a solved problem &mdash; if you&apos;re willing to deploy Loki with Promtail, or pay for Datadog Log Management, or run an Elasticsearch cluster. But for many teams, especially smaller ones, these solutions are wildly disproportionate to the actual need. You don&apos;t need petabytes of indexed log storage. You don&apos;t need a query language more complex than SQL. You need to see what your services are logging right now, across multiple pods and multiple services, in one place. CPI-Control gives you exactly that, with zero additional infrastructure.

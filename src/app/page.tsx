@@ -471,23 +471,73 @@ function FinalCTA() {
 
 function Footer() {
   return (
-    <footer className="px-6 md:px-12 py-10 border-t border-gray-800/50 flex flex-col md:flex-row justify-between items-center gap-5 font-mono text-[11px] text-gray-500">
-      <div className="flex items-center gap-3 font-semibold text-gray-300">
-        <Image src="/app-icon.png" alt="CPI-Control" width={20} height={20} className="rounded" />
-        CPI-Control
+    <footer className="border-t border-gray-800/50 px-6 md:px-12 pt-16 pb-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
+        {/* Brand */}
+        <div className="col-span-2 md:col-span-1">
+          <div className="flex items-center gap-3 font-mono text-sm font-semibold text-gray-200 mb-3">
+            <Image src="/app-icon.png" alt="CPI-Control" width={24} height={24} className="rounded-md" />
+            CPI-Control
+          </div>
+          <p className="text-xs text-gray-500 leading-relaxed">
+            Infrastructure monitoring for teams that value privacy, simplicity, and their budget.
+          </p>
+        </div>
+
+        {/* Features */}
+        <div>
+          <h4 className="font-mono text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-3">Features</h4>
+          <ul className="space-y-2 text-xs text-gray-500">
+            <li><a href="/features/kubernetes" className="hover:text-gray-300 transition-colors">Kubernetes</a></li>
+            <li><a href="/features/health-monitoring" className="hover:text-gray-300 transition-colors">Health Monitoring</a></li>
+            <li><a href="/features/deployments" className="hover:text-gray-300 transition-colors">Deployments</a></li>
+            <li><a href="/features/live-logs" className="hover:text-gray-300 transition-colors">Live Logs</a></li>
+            <li><a href="/features/status-pages" className="hover:text-gray-300 transition-colors">Status Pages</a></li>
+          </ul>
+        </div>
+
+        {/* Compare */}
+        <div>
+          <h4 className="font-mono text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-3">Compare</h4>
+          <ul className="space-y-2 text-xs text-gray-500">
+            <li><a href="/blog/cpi-control-vs-datadog" className="hover:text-gray-300 transition-colors">vs. Datadog</a></li>
+            <li><a href="/blog/cpi-control-vs-lens" className="hover:text-gray-300 transition-colors">vs. Lens Pro</a></li>
+            <li><a href="/blog/why-we-switched-from-better-stack" className="hover:text-gray-300 transition-colors">vs. Better Stack</a></li>
+            <li><a href="/blog/free-datadog-alternatives" className="hover:text-gray-300 transition-colors">Alternatives</a></li>
+          </ul>
+        </div>
+
+        {/* Resources */}
+        <div>
+          <h4 className="font-mono text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-3">Resources</h4>
+          <ul className="space-y-2 text-xs text-gray-500">
+            <li><a href="/blog" className="hover:text-gray-300 transition-colors">Blog</a></li>
+            <li><a href="/changelog" className="hover:text-gray-300 transition-colors">Changelog</a></li>
+            <li><a href="https://github.com/CPI-Technologies-GmbH/cpi-control" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300 transition-colors">GitHub</a></li>
+            <li><a href="#pricing" className="hover:text-gray-300 transition-colors">Pricing</a></li>
+          </ul>
+        </div>
+
+        {/* Legal */}
+        <div>
+          <h4 className="font-mono text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-3">Legal</h4>
+          <ul className="space-y-2 text-xs text-gray-500">
+            <li><a href="/privacy" className="hover:text-gray-300 transition-colors">Privacy Policy</a></li>
+            <li><a href="/terms" className="hover:text-gray-300 transition-colors">Terms of Service</a></li>
+            <li><a href="/account" className="hover:text-gray-300 transition-colors">Account</a></li>
+          </ul>
+        </div>
       </div>
-      <div className="flex gap-6">
-        <a href="/blog" className="hover:text-gray-300 transition-colors">Blog</a>
-        <a href="https://github.com/CPI-Technologies-GmbH/cpi-control" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300 transition-colors">GitHub</a>
-        <a href="/changelog" className="hover:text-gray-300 transition-colors">Changelog</a>
-        <a href="/privacy" className="hover:text-gray-300 transition-colors">Privacy</a>
-        <a href="/terms" className="hover:text-gray-300 transition-colors">Terms</a>
+
+      {/* Bottom bar */}
+      <div className="border-t border-gray-800/50 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 font-mono text-[11px] text-gray-600">
+        <span>&copy; {new Date().getFullYear()} CPI Technologies GmbH. All rights reserved.</span>
+        <a href="https://cpitech.io" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+          <span>Powered by</span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="https://www.cpitech.io/images/68f8d51c2f57198f96420746_logo.svg" alt="CPI Technologies GmbH" className="h-4 opacity-50" />
+        </a>
       </div>
-      <a href="https://cpitech.io" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-        <span className="text-gray-600">Powered by</span>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="https://www.cpitech.io/images/68f8d51c2f57198f96420746_logo.svg" alt="CPI Technologies GmbH" className="h-4 opacity-50" />
-      </a>
     </footer>
   );
 }

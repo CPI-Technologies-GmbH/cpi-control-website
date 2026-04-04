@@ -39,6 +39,14 @@ export default function WhyWeSwitchedFromBetterStack() {
           </div>
         </div>
 
+        <Image
+          src="/blog/status-page-hero.png"
+          alt="Switching from Better Stack to self-hosted monitoring"
+          width={1200}
+          height={675}
+          className="w-full h-auto rounded-xl border border-gray-800 shadow-2xl shadow-black/50 mb-8"
+        />
+
         {/* Body */}
         <div className="space-y-6 text-[16px] leading-relaxed">
           <h2 className="text-2xl font-bold text-gray-100 mt-12 mb-4">We Liked Better Stack. Then We Did the Math.</h2>

@@ -28,6 +28,13 @@ export default function PostPage() {
             <time>April 2026</time>
           </div>
         </div>
+        <Image
+          src="/blog/deployment-tracking.png"
+          alt="Unified deployment tracking across multiple providers"
+          width={1200}
+          height={675}
+          className="w-full h-auto rounded-xl border border-gray-800 shadow-2xl shadow-black/50 mb-8"
+        />
         <div className="prose prose-invert prose-sm max-w-none">
           <p>
             Modern applications rarely deploy from a single place. Your marketing site ships through Vercel. Your backend deploys to Kubernetes via GitHub Actions. Your mobile API might go through Semaphore CI. Each provider has its own deployment dashboard, its own notification system, and its own way of presenting deployment history. The result is that nobody on your team has a clear answer to the simplest question in infrastructure: &quot;What deployed where, and when?&quot; CPI-Control answers this question by aggregating deployments from every provider into a single, unified timeline.

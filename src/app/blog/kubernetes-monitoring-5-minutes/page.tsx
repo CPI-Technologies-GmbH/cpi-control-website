@@ -28,6 +28,13 @@ export default function PostPage() {
             <time>April 2026</time>
           </div>
         </div>
+        <Image
+          src="/blog/kubernetes-hero.png"
+          alt="Setting up Kubernetes monitoring in 5 minutes"
+          width={1200}
+          height={675}
+          className="w-full h-auto rounded-xl border border-gray-800 shadow-2xl shadow-black/50 mb-8"
+        />
         <div className="prose prose-invert prose-sm max-w-none">
           <p>
             Most Kubernetes monitoring solutions require you to create a cloud account, install agents into your cluster, configure exporters, and wait for data to start flowing through someone else&apos;s infrastructure. That&apos;s a lot of setup for something that should be simple: seeing what&apos;s happening in your cluster right now. CPI-Control takes a different approach. It runs entirely on your machine, connects directly to your cluster via your existing kubeconfig, and gives you full visibility in about five minutes. No sign-ups, no cloud dependencies, no credit card.

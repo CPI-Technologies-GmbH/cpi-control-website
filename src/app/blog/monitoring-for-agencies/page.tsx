@@ -28,6 +28,13 @@ export default function PostPage() {
             <time>April 2026</time>
           </div>
         </div>
+        <Image
+          src="/blog/agency-hero.png"
+          alt="Infrastructure monitoring dashboard for agencies"
+          width={1200}
+          height={675}
+          className="w-full h-auto rounded-xl border border-gray-800 shadow-2xl shadow-black/50 mb-8"
+        />
         <div className="prose prose-invert prose-sm max-w-none">
           <p>
             Digital agencies have a monitoring problem that most tools weren&rsquo;t designed to solve. You&rsquo;re managing 20 client
