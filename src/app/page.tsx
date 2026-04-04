@@ -30,6 +30,7 @@ function Nav() {
         <a href="#problems" className="text-gray-500 hover:text-gray-200 text-sm font-medium transition-colors hidden md:block">Why</a>
         <a href="#features" className="text-gray-500 hover:text-gray-200 text-sm font-medium transition-colors hidden md:block">Features</a>
         <a href="#pricing" className="text-gray-500 hover:text-gray-200 text-sm font-medium transition-colors hidden md:block">Pricing</a>
+        <a href="/blog" className="text-gray-500 hover:text-gray-200 text-sm font-medium transition-colors hidden md:block">Blog</a>
         <a href="/account" className="text-gray-500 hover:text-gray-200 text-sm font-medium transition-colors hidden md:block">Account</a>
         <a href="/api/download?platform=mac" className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-mono text-sm font-semibold transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-600/25">
           Download Free &#8595;
@@ -476,6 +477,7 @@ function Footer() {
         CPI-Control
       </div>
       <div className="flex gap-6">
+        <a href="/blog" className="hover:text-gray-300 transition-colors">Blog</a>
         <a href="https://github.com/CPI-Technologies-GmbH/cpi-control" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300 transition-colors">GitHub</a>
         <a href="/changelog" className="hover:text-gray-300 transition-colors">Changelog</a>
         <a href="/privacy" className="hover:text-gray-300 transition-colors">Privacy</a>

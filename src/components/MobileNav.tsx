@@ -27,6 +27,7 @@ export default function MobileNav() {
           <a href="#problems" onClick={() => setOpen(false)} className="text-gray-400 hover:text-gray-200 text-sm font-medium py-2 transition-colors">Why</a>
           <a href="#features" onClick={() => setOpen(false)} className="text-gray-400 hover:text-gray-200 text-sm font-medium py-2 transition-colors">Features</a>
           <a href="#pricing" onClick={() => setOpen(false)} className="text-gray-400 hover:text-gray-200 text-sm font-medium py-2 transition-colors">Pricing</a>
+          <a href="/blog" onClick={() => setOpen(false)} className="text-gray-400 hover:text-gray-200 text-sm font-medium py-2 transition-colors">Blog</a>
           <a href="/changelog" onClick={() => setOpen(false)} className="text-gray-400 hover:text-gray-200 text-sm font-medium py-2 transition-colors">Changelog</a>
           <a href="/account" onClick={() => setOpen(false)} className="text-gray-400 hover:text-gray-200 text-sm font-medium py-2 transition-colors">Account</a>
         </div>
